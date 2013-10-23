@@ -16,7 +16,7 @@ public class Recv {
     channel.basicConsume(QUEUE_NAME, true, consumer);
 
     while(true){
-      QueueingConsumer.Delivery delivery = consumer.NextDelivery();
+      QueueingConsumer.Delivery delivery = consumer.nextDelivery();
       String message = new String(delivery.getBody());
     }
   }
