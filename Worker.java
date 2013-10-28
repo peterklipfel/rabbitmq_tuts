@@ -3,7 +3,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.QueueingConsumer;
 
-public class Recv {
+public class Worker {
   private final static String QUEUE_NAME = "hello";
 
   public static void main(String[] args) throws java.io.IOException, java.lang.InterruptedException  {
