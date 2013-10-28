@@ -12,7 +12,7 @@ public class NewTask {
 
     channel.queueDeclare(QUEUE_NAME, false, false, false, null);
     String message = getMessage(argv);
-    for (int i=0; i<1000; i=i+1) {
+    for (int i=0; i<10; i=i+1) {
       channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
     }
 
@@ -22,7 +22,7 @@ public class NewTask {
 
   private static String getMessage(String[] strings){
       if (strings.length < 1)
-          return "Hello World!";
+          return "processing";
       return joinStrings(strings, " ");
   }
 
