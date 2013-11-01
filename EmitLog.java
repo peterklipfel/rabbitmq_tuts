@@ -4,18 +4,17 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.MessageProperties;
 
 public class EmitLog {
-  private final static String QUEUE_NAME = "task_queue";
+  private final static String EXCHANGE_NAME = "logs";
   public static void main(String[] argv) throws java.io.IOException {
     ConnectionFactory factory = new ConnectionFactory();
     factory.setHost("localhost");
     Connection connection = factory.newConnection();
     Channel channel = connection.createChannel();
 
-    boolean durable = true;
-    channel.queueDeclare(QUEUE_NAME, durable, false, false, null);
+    channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
     String message = getMessage(argv);
     for (int i=0; i<10; i=i+1) {
-      channel.basicPublish("", QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes());
+      channel.basicPublish("", EXCHANGE_NAME, null, message.getBytes());
     }
 
     channel.close();
