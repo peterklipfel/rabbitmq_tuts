@@ -3,7 +3,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.MessageProperties;
 
-public class NewTask {
+public class EmitLog {
   private final static String QUEUE_NAME = "task_queue";
   public static void main(String[] argv) throws java.io.IOException {
     ConnectionFactory factory = new ConnectionFactory();
