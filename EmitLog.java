@@ -6,6 +6,7 @@ import com.rabbitmq.client.MessageProperties;
 public class EmitLog {
   private final static String EXCHANGE_NAME = "logs";
   public static void main(String[] argv) throws java.io.IOException {
+    
     ConnectionFactory factory = new ConnectionFactory();
     factory.setHost("localhost");
     Connection connection = factory.newConnection();
@@ -13,9 +14,10 @@ public class EmitLog {
 
     channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
     String message = getMessage(argv);
-    for (int i=0; i<10; i=i+1) {
-      channel.basicPublish("", EXCHANGE_NAME, null, message.getBytes());
-    }
+    // for (int i=0; i<10; i=i+1) {
+      channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes());
+    // }
+    System.out.println(message);
 
     channel.close();
     connection.close();
